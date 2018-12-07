@@ -1,0 +1,25 @@
+{
+  "name": "clean-blacksmith",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graned/clean-blacksmith.git"
+  },
+  "keywords": [
+    "clean-code",
+    "clean",
+    "architecture",
+    "clean architecture"
+  ],
+  "author": "Eduardo Anaya <gran_ed@hotmail.com, anayamaster@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/graned/clean-blacksmith/issues"
+  },
+  "homepage": "https://github.com/graned/clean-blacksmith#readme"
+}
