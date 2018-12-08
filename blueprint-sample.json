@@ -1,0 +1,56 @@
+{
+  "entities": [
+    {
+      "name": "Person",
+      "props": ["name","age"]
+    },
+    {
+      "name": "Pet",
+      "props": ["name","type"]
+    }
+  ],
+  "interactors": [
+    {
+      "fileName": "personInteractor",
+      "requires": ["entites", "stores"],
+      "exposeFunctions": {
+        "createInstance": { "args": [] },
+        "getName": { "args": [], "isAsync": true }
+      }
+    },
+    {
+      "fileName": "petInteractor",
+      "requires": ["entites", "stores"],
+      "exposeFunctions": {
+        "createInstance": { "args": [] },
+        "getType": { "args": [], "isAsync": true }
+      }
+    }
+  ],
+  "stores": [
+    {
+      "fileName": "personStore",
+      "requires": ["dataSource"],
+      "exposeFunctions": {
+        "persist": { "args": [], "isAsync": true }
+      }
+    },
+    {
+      "fileName": "petStore",
+      "requires": ["dataSource"],
+      "exposeFunctions": {
+        "persist": { "args": [], "isAsync": true }
+      }
+    }
+  ],
+  "useCases": [
+    {
+      "fileName": "createPerson",
+      "requires": ["personInteractor"]
+    },
+    {
+      "fileName": "createPet",
+      "requires": ["petInteractor"]
+    }
+  ]
+}
