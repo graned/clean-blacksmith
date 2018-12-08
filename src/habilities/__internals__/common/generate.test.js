@@ -14,7 +14,7 @@ module.exports = Person;`;
 
 describe('Generate Entity Code', () => {
   context('when using default template', () => {
-    it('should generate code correctly', () => {
+    it('should generate base line correctly', () => {
       const generate = generateFactory();
       const properties = generate.props(['name', 'age']);
 
@@ -23,7 +23,7 @@ describe('Generate Entity Code', () => {
         { regex: /<PROPS>/g, value: properties },
       ];
 
-      expect(generate.code(placeHolderList), 'to be', expectedOutput);
+      expect(generate.baseLine(placeHolderList), 'to be', expectedOutput);
     });
   });
 });

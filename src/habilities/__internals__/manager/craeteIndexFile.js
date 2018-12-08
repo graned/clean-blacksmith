@@ -12,7 +12,7 @@ function createIndexFile(path, layer, listToExpose) {
   ];
 
   const targetPath = path.concat(`/domain/${layer}/`);
-  file.create(targetPath, 'index.js', generate.code(placeHolderList));
+  file.create(targetPath, 'index.js', generate.baseLine(placeHolderList));
 }
 
 module.exports = createIndexFile;

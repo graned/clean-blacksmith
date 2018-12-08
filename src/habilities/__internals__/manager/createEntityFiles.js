@@ -1,10 +1,11 @@
 const file = require('../common/fs-manager');
+const entityTemplate = require('./templates/entity.template');
 const generateFactory = require('../common/generate');
 
 // NOTE: We can pass the template in a later stage
-function createEntityFiles(path, definitions, template = null) {
+function createEntityFiles(path, definitions/* , template = null */) {
   const generatedFileList = [];
-  const generate = generateFactory(template);
+  const generate = generateFactory(entityTemplate);
 
   definitions.forEach((definition) => {
     const { name, props } = definition;
@@ -18,10 +19,10 @@ function createEntityFiles(path, definitions, template = null) {
         { regex: /<ENTITY_PROPS>/g, value: properties },
       ];
 
-      const generatedCode = generate.code(placeHolderList);
+      const generatedBaseLine = generate.baseLine(placeHolderList);
 
       const targetPath = path.concat('/domain/entities/');
-      file.create(targetPath, `${name}.js`, generatedCode);
+      file.create(targetPath, `${name}.js`, generatedBaseLine);
 
       generatedFileList.push(name);
     } catch (error) {

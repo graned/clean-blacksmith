@@ -1,31 +1,55 @@
 const beautify = require('js-beautify').js;
-const defaultTemplate = require('../entities/templates/entity.template');
 
 module.exports = (codeTemplate) => {
-  const template = codeTemplate || defaultTemplate;
-
+  /**
+   * This function creates a string representation of a list of required files to be used by an
+   * index file.
+   *
+   * i.e. given a property list of ['personEntity', 'dogEntity']
+   * the function will return the following:
+   * `
+   * const personEntity = require('./personEntity');
+   * const dogEntity = require('./dogEntity');
+   * `
+   * @param {*} fileNameList List of files to be imported
+   */
   function imports(fileNameList = []) {
     let result = '';
 
-    fileNameList.forEach((fileName) => {
-      result = result.concat(`const ${fileName} = require('./${fileName}');`, '\n');
-    });
-
-    return result;
-  }
-
-  function properties(propList = []) {
-    let result = '';
-
-    propList.forEach((prop) => {
-      result = result.concat(`this.${prop} = data.${prop};`, '\n');
+    fileNameList.forEach((fileName, index) => {
+      result = index === fileNameList.length
+        ? result.concat(`const ${fileName} = require('./${fileName}');`)
+        : result.concat(`const ${fileName} = require('./${fileName}');`, '\n');
     });
 
     return result;
   }
 
   /**
-   * This function creates code based on a template and a given placeholder mapping
+   * This function creates a string representation of a list of properties to be used by an entity
+   * i.e. given a property list of ['name', 'age']
+   * the function will return the following:
+   * `
+   * this.name = data.name;
+   * this.age = data.age;
+   * `
+   *
+   * @param {*} propList List of properties to be created
+   */
+  function properties(propList = []) {
+    let result = '';
+
+    propList.forEach((prop, index) => {
+      result = index === propList.length
+        ? result.concat(`this.${prop} = data.${prop};`)
+        : result.concat(`this.${prop} = data.${prop};`, '\n');
+    });
+
+    return result;
+  }
+
+  /**
+   * This function creates base line based on a template and a given placeholder mapping
    * @param {*} placeHolderMapperList Mapper that contains a list of objects of the values to be
    *    replaced in the template. i.e. { regex: /<NAME>/g, value: 'Composer' }
    *
@@ -35,8 +59,8 @@ module.exports = (codeTemplate) => {
    *  { regex: /<INSTRUMENT>/g, value: 'Instrument' }
    * ]
    */
-  function code(placeHolderMapperList) {
-    let replacedTemplate = template;
+  function baseLine(placeHolderMapperList) {
+    let replacedTemplate = codeTemplate;
 
     placeHolderMapperList.forEach((placeholder) => {
       const { regex, value } = placeholder;
@@ -50,6 +74,6 @@ module.exports = (codeTemplate) => {
   }
 
   return {
-    code, properties, imports,
+    baseLine, properties, imports,
   };
 };
