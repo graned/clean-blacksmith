@@ -1,12 +1,26 @@
-const defaultTemplate = require('./template');
+const beautify = require('js-beautify').js;
+const defaultTemplate = require('../entities/templates/entity.template');
 
-module.exports = (template = defaultTemplate) => {
-  function props(properties = []) {
+module.exports = (codeTemplate) => {
+  const template = codeTemplate || defaultTemplate;
+
+  function imports(fileNameList = []) {
     let result = '';
 
-    properties.forEach((prop) => {
+    fileNameList.forEach((fileName) => {
+      result = result.concat(`const ${fileName} = require('./${fileName}');`, '\n');
+    });
+
+    return result;
+  }
+
+  function properties(propList = []) {
+    let result = '';
+
+    propList.forEach((prop) => {
       result = result.concat(`this.${prop} = data.${prop};`, '\n');
     });
+
     return result;
   }
 
@@ -28,12 +42,14 @@ module.exports = (template = defaultTemplate) => {
       const { regex, value } = placeholder;
       replacedTemplate = replacedTemplate.replace(regex, value);
     });
-    // const formattedCode =
 
-    return replacedTemplate;
+    return beautify(replacedTemplate, {
+      indent_size: 2,
+      preserve_newlines: false,
+    });
   }
 
   return {
-    code, props,
+    code, properties, imports,
   };
 };
