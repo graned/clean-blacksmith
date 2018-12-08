@@ -2,9 +2,10 @@
   "name": "clean-blacksmith",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/blacksmith.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "mocha '**/*.test.js'",
+    "lint": "eslint '**/*.js'"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,20 @@
   "bugs": {
     "url": "https://github.com/graned/clean-blacksmith/issues"
   },
-  "homepage": "https://github.com/graned/clean-blacksmith#readme"
+  "bin": {
+    "blacksmith": "cli/blacksmith-cli.js"
+  },
+  "homepage": "https://github.com/graned/clean-blacksmith#readme",
+  "dependencies": {
+    "command-line-args": "^5.0.2",
+    "command-line-usage": "^5.0.5",
+    "prompts": "^2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0",
+    "unexpected": "^10.39.2"
+  }
 }
