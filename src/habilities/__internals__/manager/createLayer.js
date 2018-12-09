@@ -45,7 +45,8 @@ function createLayerFiles(layer, path, valueMapper, template) {
       console.log('Something went wrong!', error);
     }
   });
-
+  // eslint-disable-next-line
+  console.log(`Created files for layer '${layer}'`);
   return generatedFileList;
 }
 
