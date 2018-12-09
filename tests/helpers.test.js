@@ -55,7 +55,7 @@ describe('Helpers: #createFunctions', () => {
         ],
       });
 
-      expect(result, 'to exhaustively satisfy', { fnNameList: ['function1'], generatedFnList: [''] });
+      expect(result, 'to exhaustively satisfy', { fnNameList: ['function1'], generatedFnList: ['\n'] });
     });
   });
 
@@ -127,7 +127,7 @@ describe('Helpers: #createPlaceHolderMapper', () => {
           name: 'personInteractor',
           placeHolderList: [
             { regex: /<DEPENDENCIES>/g, value: 'entities,stores' },
-            { regex: /<FUNCTIONS>/g, value: ['', ''] },
+            { regex: /<FUNCTIONS>/g, value: '\n\n\n' },
             { regex: /<FUNCTION_NAME_LIST>/g, value: 'createInstance,getName,' },
           ],
         },
@@ -135,7 +135,7 @@ describe('Helpers: #createPlaceHolderMapper', () => {
           name: 'petInteractor',
           placeHolderList: [
             { regex: /<DEPENDENCIES>/g, value: 'entities,stores' },
-            { regex: /<FUNCTIONS>/g, value: ['', ''] },
+            { regex: /<FUNCTIONS>/g, value: '\n\n\n' },
             { regex: /<FUNCTION_NAME_LIST>/g, value: 'createInstance,getSize,' },
           ],
         },
@@ -168,7 +168,7 @@ describe('Helpers: #createPlaceHolderMapper', () => {
           name: 'personStore',
           placeHolderList: [
             { regex: /<DEPENDENCIES>/g, value: 'dataSource' },
-            { regex: /<FUNCTIONS>/g, value: ['', ''] },
+            { regex: /<FUNCTIONS>/g, value: '\n\n\n' },
             { regex: /<FUNCTION_NAME_LIST>/g, value: 'find,create,' },
           ],
         },
@@ -176,7 +176,7 @@ describe('Helpers: #createPlaceHolderMapper', () => {
           name: 'petStore',
           placeHolderList: [
             { regex: /<DEPENDENCIES>/g, value: 'service' },
-            { regex: /<FUNCTIONS>/g, value: ['', ''] },
+            { regex: /<FUNCTIONS>/g, value: '\n\n\n' },
             { regex: /<FUNCTION_NAME_LIST>/g, value: 'request,transform,' },
           ],
         },

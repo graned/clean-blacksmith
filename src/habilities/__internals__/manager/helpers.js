@@ -42,7 +42,7 @@ function createFunctions(functionsToGenerate = {}) {
         { regex: /<FUNCTION_ARGS>/g, value: args },
       ];
 
-      generatedFnList.push(generate.baseLine(placeHolderList));
+      generatedFnList.push(generate.baseLine(placeHolderList).concat('\n'));
       fnNameList.push(fnName);
     });
   }
@@ -83,7 +83,7 @@ function createPlaceHolderMapper(layer, defs) {
           name,
           placeHolderList: [
             { regex: /<DEPENDENCIES>/g, value: dependencies.join() },
-            { regex: /<FUNCTIONS>/g, value: generatedFnList },
+            { regex: /<FUNCTIONS>/g, value: generatedFnList.join('\n') },
             { regex: /<FUNCTION_NAME_LIST>/g, value: fnNameList.join().concat(',') },
           ],
         });

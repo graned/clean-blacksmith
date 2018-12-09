@@ -34,7 +34,7 @@ function createLayerFiles(layer, path, valueMapper, template) {
 
   valueMapper.forEach((element) => {
     try {
-      const generatedBaseLine = generate.baseLine(element.placeHolderList);
+      const generatedBaseLine = generate.baseLine(element.placeHolderList).concat('\n');
 
       const targetPath = path.concat(`/domain/${layer}/`);
       file.create(targetPath, `${element.name}.js`, generatedBaseLine);

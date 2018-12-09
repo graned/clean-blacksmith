@@ -12,7 +12,7 @@ function createIndexFile(path, layer, listToExpose) {
   ];
 
   const targetPath = path.concat(`/domain/${layer}/`);
-  file.create(targetPath, 'index.js', generate.baseLine(placeHolderList));
+  file.create(targetPath, 'index.js', generate.baseLine(placeHolderList).contact('\n'));
 
   // eslint-disable-next-line
   console.log(`Created "index" file for layer ${layer}`);
