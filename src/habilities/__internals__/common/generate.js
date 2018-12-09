@@ -17,7 +17,7 @@ module.exports = (codeTemplate) => {
     let result = '';
 
     fileNameList.forEach((fileName, index) => {
-      result = index === fileNameList.length
+      result = index === fileNameList.length - 1
         ? result.concat(`const ${fileName} = require('./${fileName}');`)
         : result.concat(`const ${fileName} = require('./${fileName}');`, '\n');
     });
@@ -40,7 +40,7 @@ module.exports = (codeTemplate) => {
     let result = '';
 
     propList.forEach((prop, index) => {
-      result = index === propList.length
+      result = index === propList.length - 1
         ? result.concat(`this.${prop} = data.${prop};`)
         : result.concat(`this.${prop} = data.${prop};`, '\n');
     });
@@ -51,9 +51,8 @@ module.exports = (codeTemplate) => {
   /**
    * This function creates base line based on a template and a given placeholder mapping
    * @param {*} placeHolderMapperList Mapper that contains a list of objects of the values to be
-   *    replaced in the template. i.e. { regex: /<NAME>/g, value: 'Composer' }
-   *
-   * sample placeHolderMapperList value is:
+   * replaced in the template. i.e. { regex: /<NAME>/g, value: 'Composer' }
+   * @example
    * [
    *  { regex: /<NAME>/g, value: 'Composer' },
    *  { regex: /<INSTRUMENT>/g, value: 'Instrument' }
@@ -67,10 +66,7 @@ module.exports = (codeTemplate) => {
       replacedTemplate = replacedTemplate.replace(regex, value);
     });
 
-    return beautify(replacedTemplate, {
-      indent_size: 2,
-      preserve_newlines: false,
-    });
+    return beautify(replacedTemplate, { indent_size: 2 });
   }
 
   return {
