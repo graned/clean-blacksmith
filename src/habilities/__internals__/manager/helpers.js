@@ -1,9 +1,27 @@
 const functionTemplate = require('./templates/function.template');
-const generate = require('../common/generate')(functionTemplate);
+const constructorTemplate = require('./templates/constructor.template');
+const generateFactory = require('../common/generate');
+
+function createContructor(properties = []) {
+  const generate = generateFactory(constructorTemplate);
+
+  if (properties.length === 0) {
+    return '';
+  }
+
+  const props = generate.properties(properties);
+  const placeHolderList = [
+    { regex: /<ENTITY_PROPS>/g, value: props },
+  ];
+
+  return generate.baseLine(placeHolderList).concat('\n');
+}
 
 function createFunctions(functionsToGenerate) {
   const generatedFnList = [];
   const fnNameList = [];
+
+  const generate = generateFactory(functionTemplate);
 
   Object.keys(functionsToGenerate).forEach((fnName) => {
     const { args, isAsync = false } = functionsToGenerate[fnName];
@@ -28,12 +46,12 @@ function createPlaceHolderMapper(layer, defs) {
     case 'entities':
       defs.forEach((def) => {
         const { name, props } = def;
-        const properties = generate.properties(props);
+        const constructor = createContructor(props);
         mapper.push({
           name,
           placeHolderList: [
             { regex: /<ENTITY_NAME>/g, value: name },
-            { regex: /<ENTITY_PROPS>/g, value: properties },
+            { regex: /<ENTITY_CONSTRUCTOR>/g, value: constructor },
           ],
         });
       });
@@ -76,6 +94,7 @@ function createPlaceHolderMapper(layer, defs) {
 }
 
 module.exports = {
+  createContructor,
   createFunctions,
   createPlaceHolderMapper,
 };

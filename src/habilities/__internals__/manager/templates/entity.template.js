@@ -1,9 +1,6 @@
 module.exports = `
 class <ENTITY_NAME> {
-  constructor(data) {
-    <ENTITY_PROPS>
-  }
-
+  <ENTITY_CONSTRUCTOR>
   static create(data) {
     return Object.freeze(new <ENTITY_NAME>(data));
   }
