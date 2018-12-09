@@ -11,17 +11,17 @@
   ],
   "interactors": [
     {
-      "fileName": "personInteractor",
-      "requires": ["entites", "stores"],
-      "exposeFunctions": {
+      "name": "personInteractor",
+      "dependencies": ["entites", "stores"],
+      "functions": {
         "createInstance": { "args": [] },
         "getName": { "args": [], "isAsync": true }
       }
     },
     {
-      "fileName": "petInteractor",
-      "requires": ["entites", "stores"],
-      "exposeFunctions": {
+      "name": "petInteractor",
+      "dependencies": ["entites", "stores"],
+      "functions": {
         "createInstance": { "args": [] },
         "getType": { "args": [], "isAsync": true }
       }
@@ -29,28 +29,30 @@
   ],
   "stores": [
     {
-      "fileName": "personStore",
-      "requires": ["dataSource"],
-      "exposeFunctions": {
+      "name": "personStore",
+      "dependencies": ["dataSource"],
+      "functions": {
         "persist": { "args": [], "isAsync": true }
       }
     },
     {
-      "fileName": "petStore",
-      "requires": ["dataSource"],
-      "exposeFunctions": {
+      "name": "petStore",
+      "dependencies": ["dataSource"],
+      "functions": {
         "persist": { "args": [], "isAsync": true }
       }
     }
   ],
   "useCases": [
     {
-      "fileName": "createPerson",
-      "requires": ["personInteractor"]
+      "name": "createPerson",
+      "dependencies": ["personInteractor"],
+      "args": []
     },
     {
-      "fileName": "createPet",
-      "requires": ["petInteractor"]
+      "name": "createPet",
+      "dependencies": ["petInteractor"],
+      "args": []
     }
   ]
 }
