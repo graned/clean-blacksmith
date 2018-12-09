@@ -13,8 +13,8 @@ function createUseCaseFiles(path, definitions/* , template = null */) {
     try {
       // REVISIT: At the moment the placeholders reggex are coupled to the template.
       const placeHolderList = [
-        { regex: /<USE_CASE_DEPENDENCIES>/g, value: dependencies.toString() },
-        { regex: /<USE_CASE_ARGS>/g, value: args.toString() },
+        { regex: /<USE_CASE_DEPENDENCIES>/g, value: dependencies.join() },
+        { regex: /<USE_CASE_ARGS>/g, value: args.join() },
       ];
 
       const generatedBaseLine = generate.baseLine(placeHolderList);

@@ -13,7 +13,7 @@ function createFunctions(functionsToGenerate) {
     const { args, isAsync = false } = functionsToGenerate[fnName];
 
     const placeHolderList = [
-      { regex: /<ASYNC_KEY>\s/g, value: isAsync ? 'async ' : '' },
+      { regex: /<ASYNC_KEY>\s/g, value: isAsync ? 'async'.concat(' ') : '' },
       { regex: /<FUNCTION_NAME>/g, value: fnName },
       { regex: /<FUNCTION_ARGS>/g, value: args },
     ];
@@ -38,9 +38,9 @@ function createLayerFiles(path, definitions, layer /* , template = null */) {
 
       // REVISIT: At the moment the placeholders reggex are coupled to the template.
       const placeHolderList = [
-        { regex: /<DEPENDENCIES>/g, value: dependencies.toString() },
+        { regex: /<DEPENDENCIES>/g, value: dependencies.join() },
         { regex: /<FUNCTIONS>/g, value: stringValue },
-        { regex: /<FUNCTION_NAME_LIST>/g, value: generatedFnList.toString() },
+        { regex: /<FUNCTION_NAME_LIST>/g, value: generatedFnList.join() },
       ];
 
       const generatedBaseLine = generate.baseLine(placeHolderList);
