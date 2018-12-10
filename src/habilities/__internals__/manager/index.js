@@ -1,6 +1,7 @@
 const indexFiles = require('./createIndexFile');
 const createLayer = require('./createLayer');
 const helpers = require('./helpers');
+const readBluePrint = require('./readBluePrint');
 
 module.exports = ({
   createLayer: {
@@ -12,4 +13,5 @@ module.exports = ({
 
   createIndex: indexFiles,
   helpers,
+  readBluePrint,
 });
