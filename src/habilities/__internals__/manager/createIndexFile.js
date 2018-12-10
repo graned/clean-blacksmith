@@ -1,3 +1,4 @@
+const logger = require('get-logger')('createIndex');
 const file = require('../common/fs-manager');
 const entityIndexTemplate = require('./templates/index.template');
 const generateFactory = require('../common/generate');
@@ -14,8 +15,7 @@ function createIndexFile(path, layer, listToExpose) {
   const targetPath = path.concat(`/domain/${layer}/`);
   file.create(targetPath, 'index.js', generate.baseLine(placeHolderList).concat('\n'));
 
-  // eslint-disable-next-line
-  console.log(`Created "index" file for layer ${layer}`);
+  logger.info(`Created file <${layer}>: 'index.js'`);
 }
 
 module.exports = createIndexFile;

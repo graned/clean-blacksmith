@@ -1,3 +1,5 @@
+const logger = require('get-logger')('createLayer');
+
 const file = require('../common/fs-manager');
 const templates = require('./templates');
 const generateFactory = require('../common/generate');
@@ -40,13 +42,11 @@ function createLayerFiles(layer, path, valueMapper, template) {
       file.create(targetPath, `${element.name}.js`, generatedBaseLine);
 
       generatedFileList.push(element.name);
+      logger.info(`Created file <${layer}>: '${element.name}.js'`);
     } catch (error) {
-      // eslint-disable-next-line
-      console.log('Something went wrong!', error);
+      logger.error('Something went wrong!', error);
     }
   });
-  // eslint-disable-next-line
-  console.log(`Created files for layer '${layer}'`);
   return generatedFileList;
 }
 
