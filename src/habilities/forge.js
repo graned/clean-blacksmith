@@ -1,3 +1,5 @@
+const logger = require('get-logger')('forge');
+
 const manager = require('./__internals__/manager');
 
 function createDomain(targetPath, resources) {
@@ -15,9 +17,9 @@ async function forge({ target, blueprint: blueprintPath }) {
   try {
     const blueprint = await manager.readBluePrint.fromJson(blueprintPath);
     createDomain(target, blueprint);
+    logger.info('Finished forging! Happy coding :)');
   } catch (error) {
-    // eslint-disable-next-line
-    console.log('Error while forging!', error);
+    logger.info('Error while forging!', error);
   }
 }
 

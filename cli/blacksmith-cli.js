@@ -23,5 +23,4 @@ if (mainOptions.command === 'forge') {
   mergeOptions = commandLineArgs(mergeDefinitions, { argv });
 }
 
-// eslint-disable-next-line
 blacksmith(mainOptions.command, mergeOptions).catch(console.log);
