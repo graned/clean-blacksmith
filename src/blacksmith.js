@@ -1,18 +1,12 @@
 const habilities = require('./habilities');
 
-/**
-  options {
-    command: 'forge',
-    target: 'path/',
-    blueprint: 'path/',
-  }
- */
-module.exports = (options) => {
-  const { command, ...opts } = options;
+module.exports = async (command, details) => {
   const actionToTake = habilities[command];
 
-  if (!actionToTake) throw new Error(`Sorry I don't know how to '${options.command}'`);
+  if (!actionToTake) {
+    return `Sorry I don't know how to '${command}'`;
+  }
 
-  const actionResult = actionToTake.apply(this, opts);
+  const actionResult = await actionToTake(details);
   return actionResult;
 };
