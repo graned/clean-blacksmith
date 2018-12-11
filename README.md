@@ -45,8 +45,61 @@ createIndex: Created domain file: 'index.js'
 forge: Finished forging! Happy coding :)
 ```
 ## As CLI tool
-// TODO
+The module also offers a CLI tool if you desire to interact with the **_clean-blacksmith_** through your terminal.
+```
+blacksmith <COMMAND> --target <PATH> --blueprint <PATH>
 
+blacksmith forge --target "/path-to-project/" --blueprint "/path-to-blueprint/blueprint.json"
+```
 
+If you need to learn what is the current available commands, you can display the help:
+```
+blacksmith -h
 
+or
 
+blacksmith --help
+```
+
+# Blueprint file
+In order for the **_blacksmith_** to be able to work, you need to specify a blueprint JSON file. This file has the following structure:
+
+_NOTE_: This project contains two full blueprint example definitions in the `/examples` folder.
+
+```
+{
+  <clean_arhictecture_layer>: [Array of layer definitions]
+}
+
+for example:
+{
+  "entities": [
+    {
+      "name": "Sword",
+      "props": ["type","weight"]
+    }
+  ],
+  "interactors": [
+    {
+      "name": "swordInteractor",
+      "dependencies": ["entities", "stores"],
+      "functions": {
+        "requestMaterials": { "args": [] },
+        "meltSilver": { "args": [], "isAsync": true }
+      }
+    }
+  ],
+  "stores": [...],
+  "useCases": [
+    {
+      "name": "forgeKatana",
+      "dependencies": ["swordInteractor"],
+      "args": ["swordMaterials"]
+    }
+  ]
+}
+```
+
+# Further plans
+- Inlude more command options: `ammend`, `enhance`, `destroy`.
+- Add a way to create the blueprint in a more friendly way. UI will be ideal
