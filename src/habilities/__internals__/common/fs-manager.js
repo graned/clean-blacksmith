@@ -1,11 +1,16 @@
 const fs = require('fs-extra');
+const path = require('path');
 
-function create(path, fileName, data) {
-  fs.outputFileSync(path.concat(fileName), data, 'utf-8');
+function create(targetPath, fileName, data) {
+  const fullName = path.format({
+    root: targetPath,
+    base: fileName,
+  });
+  fs.outputFileSync(fullName, data, 'utf-8');
 }
 
-function readJson(path) {
-  return fs.readJson(path);
+function readJson(jsonFilePath) {
+  return fs.readJson(jsonFilePath);
 }
 
 module.exports = {

@@ -2,6 +2,6 @@ module.exports = `
 <IMPORTS>
 
 module.exports = {
-  <NAMES>
+  <EXPOSED_NAMES>
 };
 `;
