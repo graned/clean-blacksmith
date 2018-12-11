@@ -18,10 +18,19 @@ describe('Generate', () => {
     expect(generate.properties(propList), 'to be', 'this.name = data.name;\nthis.age = data.age;');
   });
 
-  it('should generate correct import definition', () => {
+  it('should generate correct import definition with given path', () => {
     const generate = generateFactory();
-    const fileNameList = ['file1', 'file2'];
+    const fileNameList = [
+      {
+        name: 'file1',
+        path: '/my-path/some-dir',
+      },
+      {
+        name: 'file2',
+        path: null,
+      },
+    ];
 
-    expect(generate.imports(fileNameList), 'to be', 'const file1 = require(\'./file1\');\nconst file2 = require(\'./file2\');');
+    expect(generate.imports(fileNameList), 'to be', 'const file1 = require(\'./my-path/some-dir/file1\');\nconst file2 = require(\'./file2\');');
   });
 });

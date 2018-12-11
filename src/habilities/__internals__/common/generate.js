@@ -1,4 +1,6 @@
 const beautify = require('js-beautify').js;
+const path = require('path');
+
 
 /**
  * This function creates a string representation of a list of required files to be used by an
@@ -10,15 +12,27 @@ const beautify = require('js-beautify').js;
  * const personEntity = require('./personEntity');
  * const dogEntity = require('./dogEntity');
  * `
+ *
  * @param {*} fileNameList List of files to be imported
+ * @param {*} path Path where the the files are located
  */
-function imports(fileNameList = []) {
+function imports(fileList = []) {
   let result = '';
 
-  fileNameList.forEach((fileName, index) => {
-    result = index === fileNameList.length - 1
-      ? result.concat(`const ${fileName} = require('./${fileName}');`)
-      : result.concat(`const ${fileName} = require('./${fileName}');`, '\n');
+  fileList.forEach((file, index) => {
+    const pathOpts = { root: './', base: file.name };
+
+    if (file.path != null) {
+      const normalizedPath = path.normalize(file.path);
+      pathOpts.dir = normalizedPath.startsWith('/')
+        ? '.'.concat(normalizedPath)
+        : './'.concat(normalizedPath);
+    }
+
+    const fileFullPath = path.format(pathOpts);
+    result = index === fileList.length - 1
+      ? result.concat(`const ${file.name} = require('${fileFullPath}');`)
+      : result.concat(`const ${file.name} = require('${fileFullPath}');`, '\n');
   });
 
   return result;
