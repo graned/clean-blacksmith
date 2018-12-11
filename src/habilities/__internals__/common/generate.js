@@ -1,8 +1,51 @@
 const beautify = require('js-beautify').js;
 const path = require('path');
 
-function domainInit() {
-  throw new Error('Not yet implemented');
+/**
+ * This function creates a string representation of the domain initialization.
+ * @param domainDefinition Created domain definition object.
+ * @example domainDefinition
+ * {
+ *   entities: [...],
+ *   stores: [
+ *     {
+ *       fileName: 'swordStore',
+ *       dependencies: ['datasource']
+ *     },
+ *     ...,
+ *   ],
+ *   interactors: [
+ *     {
+ *       fileName: 'swordInteractor',
+ *       dependencies: ['entities', 'stores']
+ *     },
+ *     ...
+ *   ],
+ *   useCases: [...],
+ * }
+ *
+ * @returns String representation of the domain to be initialized.
+ * sample return:
+ * const swordStore = stores.swordStore(datasource);
+ *
+ * const swordInteractor = interactors.swordInteractor(entities,stores);
+ */
+function domainInit(domainDefinition) {
+  let result = '';
+
+  Object.keys(domainDefinition).forEach((layer) => {
+    const fileList = domainDefinition[layer];
+
+    fileList.forEach((filedefinition, index) => {
+      const { fileName, dependencies } = filedefinition;
+
+      result = index !== fileList.length - 1
+        ? result.concat(`const ${fileName} = ${layer}.${fileName}(${dependencies});`, '\n')
+        : result.concat(`const ${fileName} = ${layer}.${fileName}(${dependencies});`, '\n\n');
+    });
+  });
+
+  return result;
 }
 
 /**

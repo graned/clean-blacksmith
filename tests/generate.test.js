@@ -34,5 +34,28 @@ describe('Generate', () => {
     expect(generate.imports(fileNameList), 'to be', 'const file1 = require(\'./my-path/some-dir/file1\');\nconst file2 = require(\'./file2\');');
   });
 
-  xit('should generate correct dependencies init definiton', () => {});
+  it('should generate correct dependencies init definiton', () => {
+    const generate = generateFactory();
+
+    const domainDefinition = {
+      stores: [
+        {
+          fileName: 'swordStore',
+          dependencies: ['dataSource'],
+        },
+      ],
+      interactors: [
+        {
+          fileName: 'swordInteractor',
+          dependencies: ['entities', 'stores'],
+        },
+        {
+          fileName: 'hammerInteractor',
+          dependencies: ['entities'],
+        },
+      ],
+    };
+
+    expect(generate.domainInit(domainDefinition), 'to be', 'const swordStore = stores.swordStore(dataSource);\n\nconst swordInteractor = interactors.swordInteractor(entities,stores);\nconst hammerInteractor = interactors.hammerInteractor(entities);\n\n');
+  });
 });
