@@ -1,13 +1,25 @@
+const path = require('path');
 const logger = require('get-logger')('forge');
-
 const manager = require('./__internals__/manager');
 
 function createDomain(targetPath, resources) {
-  Object.keys(resources).forEach((layer) => {
-    const layerDefinition = resources[layer];
-    const mapper = manager.helpers.createPlaceHolderMapper(layer, layerDefinition);
-    const fileNameList = manager.createLayer[layer](targetPath, mapper);
-    manager.createIndex(targetPath, layer, fileNameList);
+  const domainResults = [];
+  const domainPath = path.join(targetPath, '/domain');
+
+  Object.keys(resources).forEach((layerToCreate) => {
+    const layerPath = path.join(domainPath, `/${layerToCreate}`);
+    const layerDefinition = resources[layerToCreate];
+
+    const mapper = manager.helpers.createPlaceHolderMapper(layerToCreate, layerDefinition);
+    const fileList = manager.createDomain.layer[layerToCreate](layerPath, mapper);
+
+    const indexFileListMapper = manager.helpers.createPlaceHolderMapper('index', fileList);
+    manager.createIndex.layer(layerPath, indexFileListMapper);
+    domainPath.push({
+      layerToCreate,
+      createdFiles: fileList || [],
+      dependencies: layerDefinition.dependencies || [],
+    });
   });
 
   console.log('TODO: create domain file');
