@@ -31,7 +31,7 @@ describe('Generate', () => {
       },
     ];
 
-    expect(generate.imports(fileNameList), 'to be', 'const file1 = require(\'./my-path/some-dir/file1\');\nconst file2 = require(\'./file2\');');
+    expect(generate.imports(fileNameList), 'to be', 'const file1 = require(\'./my-path/some-dir/file1\');\nconst file2 = require(\'./file2\');\n\n');
   });
 
   it('should generate correct dependencies init definiton', () => {

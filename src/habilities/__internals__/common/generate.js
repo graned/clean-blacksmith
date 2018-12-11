@@ -76,9 +76,9 @@ function imports(fileList = []) {
     }
 
     const fileFullPath = path.format(pathOpts);
-    result = index === fileList.length - 1
-      ? result.concat(`const ${file.name} = require('${fileFullPath}');`)
-      : result.concat(`const ${file.name} = require('${fileFullPath}');`, '\n');
+    result = index !== fileList.length - 1
+      ? result.concat(`const ${file.name} = require('${fileFullPath}');`, '\n')
+      : result.concat(`const ${file.name} = require('${fileFullPath}');`, '\n\n');
   });
 
   return result;
