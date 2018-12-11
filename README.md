@@ -33,15 +33,15 @@ The blacksmith will give you some feedback through log messages to see what has 
 ```
 Sample console output:
 
-createLayer: Created file <entities>: 'Sword.js'
-createIndex: Created file <entities>: 'index.js'
-createLayer: Created file <interactors>: 'swordInteractor.js'
-createIndex: Created file <interactors>: 'index.js'
-createLayer: Created file <stores>: 'swordStore.js'
-createIndex: Created file <stores>: 'index.js'
-createLayer: Created file <useCases>: 'forgeSword.js'
-createIndex: Created file <useCases>: 'index.js'
-createIndex: Created domain file: 'index.js'
+createLayer: Created file: 'entities/Sword.js'
+createIndex: Created file: 'entities/index.js'
+createLayer: Created file: 'interactors/swordInteractor.js'
+createIndex: Created file: 'interactors/index.js'
+createLayer: Created file: 'stores/swordStore.js'
+createIndex: Created file: 'stores/index.js'
+createLayer: Created file: 'useCases/forgeSword.js'
+createIndex: Created file: 'useCases/index.js'
+createIndex: Created file: 'domain/index.js'
 forge: Finished forging! Happy coding :)
 ```
 ## As CLI tool

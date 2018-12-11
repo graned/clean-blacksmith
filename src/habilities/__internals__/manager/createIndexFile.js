@@ -15,7 +15,7 @@ function createIndexFile(path, layer, listToExpose) {
   const targetPath = path.concat(`/domain/${layer}/`);
   file.create(targetPath, 'index.js', generate.baseLine(placeHolderList).concat('\n'));
 
-  logger.info(`Created file <${layer}>: 'index.js'`);
+  logger.info(`Created file: '${layer}/index.js'`);
 }
 
 module.exports = createIndexFile;

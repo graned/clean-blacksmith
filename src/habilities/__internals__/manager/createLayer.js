@@ -42,7 +42,7 @@ function createLayerFiles(layer, path, valueMapper, template) {
       file.create(targetPath, `${element.name}.js`, generatedBaseLine);
 
       generatedFileList.push(element.name);
-      logger.info(`Created file <${layer}>: '${element.name}.js'`);
+      logger.info(`Created file: '${layer}/${element.name}.js'`);
     } catch (error) {
       logger.error('Something went wrong!', error);
     }
