@@ -1,17 +1,9 @@
-const indexFiles = require('./createIndexFile');
-const createLayer = require('./createLayer');
+const createDomain = require('./createDomain');
 const helpers = require('./helpers');
 const readBluePrint = require('./readBluePrint');
 
 module.exports = ({
-  createLayer: {
-    useCases: createLayer.useCases,
-    interactors: createLayer.interactors,
-    entities: createLayer.entities,
-    stores: createLayer.stores,
-  },
-
-  createIndex: indexFiles,
+  createDomain,
   helpers,
   readBluePrint,
 });

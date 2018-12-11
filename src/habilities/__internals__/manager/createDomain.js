@@ -28,9 +28,10 @@ const generateFactory = require('../common/generate');
  * @param {*} path Path where the file(s) will be generated
  * @param {*} valueMapper List of values to be appended to the file
  * @param {*} template Template to use to generate file content
- * @returns A list of names of files that where successfuly created.
+ * @returns A list of fileName and the location where they were generated.
+ *    i.e. [{ fileName: 'Person.js', path: '/domain/entities' }]
  */
-function createLayerFiles(layer, path, valueMapper, template) {
+function createDomainFiles(path, valueMapper, template) {
   const generatedFileList = [];
   const generate = generateFactory(template);
 
@@ -38,11 +39,10 @@ function createLayerFiles(layer, path, valueMapper, template) {
     try {
       const generatedBaseLine = generate.baseLine(element.placeHolderList).concat('\n');
 
-      const targetPath = path.concat(`/domain/${layer}/`);
-      file.create(targetPath, `${element.name}.js`, generatedBaseLine);
+      file.create(path, `${element.name}.js`, generatedBaseLine);
 
-      generatedFileList.push(element.name);
-      logger.info(`Created file: '${layer}/${element.name}.js'`);
+      generatedFileList.push({ fileName: element.name, path });
+      logger.info(`Created file: '${path}/${element.name}.js'`);
     } catch (error) {
       logger.error('Something went wrong!', error);
     }
@@ -51,8 +51,13 @@ function createLayerFiles(layer, path, valueMapper, template) {
 }
 
 module.exports = {
-  useCases: (path, valueMapper) => createLayerFiles('useCases', path, valueMapper, templates.useCases),
-  interactors: (path, valueMapper) => createLayerFiles('interactors', path, valueMapper, templates.interactors),
-  entities: (path, valueMapper) => createLayerFiles('entities', path, valueMapper, templates.entities),
-  stores: (path, valueMapper) => createLayerFiles('stores', path, valueMapper, templates.stores),
+  layer: {
+    useCases: (path, valueMapper) => createDomainFiles(path, valueMapper, templates.useCases),
+    interactors: (path, valueMapper) => createDomainFiles(path, valueMapper, templates.interactors),
+    entities: (path, valueMapper) => createDomainFiles(path, valueMapper, templates.entities),
+    stores: (path, valueMapper) => createDomainFiles(path, valueMapper, templates.stores),
+    index: (path, valueMapper) => createDomainFiles(path, valueMapper, templates.layerIndex),
+  },
+
+  index: (path, valueMapper) => createDomainFiles(path, valueMapper, templates.domainIndex),
 };
