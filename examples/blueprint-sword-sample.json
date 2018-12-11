@@ -1,0 +1,34 @@
+{
+  "entities": [
+    {
+      "name": "Sword",
+      "props": ["type","weight"]
+    }
+  ],
+  "interactors": [
+    {
+      "name": "swordInteractor",
+      "dependencies": ["entities", "stores"],
+      "functions": {
+        "requestMaterials": { "args": [] },
+        "meltSilver": { "args": [], "isAsync": true }
+      }
+    }
+  ],
+  "stores": [
+    {
+      "name": "swordStore",
+      "dependencies": ["dataSource"],
+      "functions": {
+        "saveSword": { "args": [], "isAsync": true }
+      }
+    }
+  ],
+  "useCases": [
+    {
+      "name": "forgeKatana",
+      "dependencies": ["swordInteractor"],
+      "args": ["swordMaterials"]
+    }
+  ]
+}
