@@ -8,8 +8,8 @@ function createIndexFile(path, layer, listToExpose) {
 
   const imports = generate.imports(listToExpose);
   const placeHolderList = [
-    { regex: /<ENTITY_IMPORTS>/g, value: imports },
-    { regex: /<ENTITY_NAMES>/g, value: listToExpose.join().concat(',') },
+    { regex: /<IMPORTS>/g, value: imports },
+    { regex: /<NAMES>/g, value: listToExpose.join().concat(',') },
   ];
 
   const targetPath = path.concat(`/domain/${layer}/`);

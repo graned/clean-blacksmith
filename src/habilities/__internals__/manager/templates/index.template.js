@@ -1,7 +1,7 @@
 module.exports = `
-<ENTITY_IMPORTS>
+<IMPORTS>
 
 module.exports = {
-  <ENTITY_NAMES>
+  <NAMES>
 };
 `;
