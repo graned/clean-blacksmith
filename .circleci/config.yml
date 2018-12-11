@@ -1,0 +1,10 @@
+# Javascript Node CircleCI 2.0 configuration file
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.11
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test
