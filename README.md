@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/graned/clean-blacksmith/tree/master.svg?style=svg)](https://circleci.com/gh/graned/clean-blacksmith/tree/master)
+
 # Clean Blacksmith
 Generate a [clean-architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) skeleton project easy and fast!.
 
