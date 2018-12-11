@@ -22,7 +22,8 @@ function createDomain(targetPath, resources) {
     });
   });
 
-  console.log('TODO: create domain file');
+  const domainIndexMapper = manager.helpers.createPlaceHolderMapper('domain', domainResults);
+  manager.createIndex.domain(domainPath, domainIndexMapper);
 }
 
 async function forge({ target, blueprint: blueprintPath }) {

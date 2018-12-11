@@ -1,6 +1,9 @@
 const beautify = require('js-beautify').js;
 const path = require('path');
 
+function domainInit() {
+  throw new Error('Not yet implemented');
+}
 
 /**
  * This function creates a string representation of a list of required files to be used by an
@@ -85,6 +88,7 @@ function baseLine(placeHolderMapperList, codeTemplate) {
 }
 module.exports = (codeTemplate = null) => ({
   baseLine: placeHolderMapperList => baseLine(placeHolderMapperList, codeTemplate),
+  domainInit,
   properties,
   imports,
 });
