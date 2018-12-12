@@ -3,7 +3,7 @@ const logger = require('get-logger')('forge');
 const manager = require('./__internals__/manager');
 
 function createDomain(targetPath, resources) {
-  const { helpers, createDomainDefinition, createDomain: createDomainFiles } = manager;
+  const { helpers, createDomain: createDomainFiles } = manager;
   const domainInitDefinitions = {};
   const domainPath = path.join(targetPath, '/domain');
 
@@ -20,22 +20,19 @@ function createDomain(targetPath, resources) {
       layerPlaceHolderMapper,
     );
 
-    const layerIndexPlaceHolderMapper = helpers.placeHolderMappers.createLayerIndex(
-      'index',
-      createdFiles,
-    );
+    const layerIndexPlaceHolderMapper = helpers.placeHolderMappers.createLayerIndex(createdFiles);
+
     // NOTE: We create an index file in order to expose the layer files we created, however this
     //       file is not added to our list of files created.
     createDomainFiles.layer.index(layerPath, layerIndexPlaceHolderMapper);
 
-    domainInitDefinitions[layerToCreate] = createDomainDefinition(
+    domainInitDefinitions[layerToCreate] = helpers.createDomainDefinition(
       createdFiles,
       layerDefinition,
     );
   });
 
   const domainIndexPlaceHolderMapper = helpers.placeHolderMappers.createDomainIndex(
-    'domain',
     domainInitDefinitions,
   );
   manager.createDomain.index(domainPath, domainIndexPlaceHolderMapper);
