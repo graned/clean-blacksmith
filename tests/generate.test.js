@@ -31,31 +31,37 @@ describe('Generate', () => {
       },
     ];
 
-    expect(generate.imports(fileNameList), 'to be', 'const file1 = require(\'./my-path/some-dir/file1\');\nconst file2 = require(\'./file2\');\n\n');
+    expect(generate.imports(fileNameList), 'to be', 'const file1 = require(\'./my-path/some-dir/file1\');\nconst file2 = require(\'./file2\');\n');
   });
 
   it('should generate correct dependencies init definiton', () => {
     const generate = generateFactory();
 
     const domainDefinition = {
+      entities: [
+        {
+          name: 'Sword',
+          dependencies: [],
+        },
+      ],
       stores: [
         {
-          fileName: 'swordStore',
+          name: 'swordStore',
           dependencies: ['dataSource'],
         },
       ],
       interactors: [
         {
-          fileName: 'swordInteractor',
+          name: 'swordInteractor',
           dependencies: ['entities', 'stores'],
         },
         {
-          fileName: 'hammerInteractor',
+          name: 'hammerInteractor',
           dependencies: ['entities'],
         },
       ],
     };
 
-    expect(generate.domainInit(domainDefinition), 'to be', 'const swordStore = stores.swordStore(dataSource);\n\nconst swordInteractor = interactors.swordInteractor(entities,stores);\nconst hammerInteractor = interactors.hammerInteractor(entities);\n\n');
+    expect(generate.domainInit(domainDefinition), 'to be', 'const { Sword, } = entities;\n\nconst swordStore = stores.swordStore(dataSource);\n\nconst swordInteractor = interactors.swordInteractor(entities,stores);\nconst hammerInteractor = interactors.hammerInteractor(entities);\n\n');
   });
 });

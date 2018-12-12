@@ -81,7 +81,7 @@ describe('Helpers: #createDomainDefinition', () => {
 
   context('with a given list of created files', () => {
     it('should generate correct placeholder list', () => {
-      expect(helpers.createDomainDefinition([{ fileName: 'swordStore', path: '/' }], definition),
+      expect(helpers.createDomainDefinition([{ name: 'swordStore', path: '/' }], definition),
         'to equal',
         [{
           name: 'swordStore',
@@ -256,7 +256,7 @@ describe('Helpers: Placeholder mappers', () => {
     });
 
     it('should generate correct placeholder mapper', () => {
-      const fileList = [{ fileName: 'something', path: '.' }, { fileName: 'other', path: '.' }];
+      const fileList = [{ name: 'something', path: '.' }, { name: 'other', path: '.' }];
       expect(helpers.placeHolderMappers.createLayerIndex(fileList), 'to exhaustively satisfy', [
         {
           name: 'index',

@@ -36,13 +36,18 @@ function domainInit(domainDefinition) {
   Object.keys(domainDefinition).forEach((layer) => {
     const fileList = domainDefinition[layer];
 
-    fileList.forEach((filedefinition, index) => {
-      const { fileName, dependencies } = filedefinition;
+    if (layer === 'entities') {
+      const createdEntities = fileList.map(file => file.name);
+      result = result.concat(`const { ${createdEntities.join().concat(',')} } = ${layer};`, '\n\n');
+    } else {
+      fileList.forEach((filedefinition, index) => {
+        const { name, dependencies } = filedefinition;
 
-      result = index !== fileList.length - 1
-        ? result.concat(`const ${fileName} = ${layer}.${fileName}(${dependencies});`, '\n')
-        : result.concat(`const ${fileName} = ${layer}.${fileName}(${dependencies});`, '\n\n');
-    });
+        result = index !== fileList.length - 1
+          ? result.concat(`const ${name} = ${layer}.${name}(${dependencies});`, '\n')
+          : result.concat(`const ${name} = ${layer}.${name}(${dependencies});`, '\n\n');
+      });
+    }
   });
 
   return result;
@@ -89,7 +94,7 @@ function imports(fileList = []) {
     const fileFullPath = path.format(pathOpts);
     result = index !== fileList.length - 1
       ? result.concat(`const ${file.name} = require('${fileFullPath}');`, '\n')
-      : result.concat(`const ${file.name} = require('${fileFullPath}');`, '\n\n');
+      : result.concat(`const ${file.name} = require('${fileFullPath}');`, '\n');
   });
 
   return result;
