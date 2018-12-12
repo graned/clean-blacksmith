@@ -52,7 +52,18 @@ function domainInit(domainDefinition) {
  * This function creates a string representation of a list of required files to be used by an
  * index file.
  *
- * i.e. given a property list of ['personEntity', 'dogEntity']
+ * i.e. given a property list of files
+ * [
+ *  {
+ *    fileName: 'personEntity',
+ *    path: 'somePath/dir',
+ *  }
+ *  {
+ *    fileName: 'dogEntity',
+ *    path: 'somePath/dir',
+ *  },
+ * ]
+ *
  * the function will return the following:
  * `
  * const personEntity = require('./personEntity');
