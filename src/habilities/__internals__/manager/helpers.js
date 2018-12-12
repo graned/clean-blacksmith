@@ -134,21 +134,19 @@ function createPlaceHolderMapper(layer, defs) {
   return mapper;
 }
 
-function createPlaceHolderIndexMapper(indexType, defs) {
-  const mapper = [];
+function createPlaceHolderIndexMapper(indexType/* , defs */) {
+  // const mapper = [];
 
   switch (indexType) {
-    case 'layer':
-      break;
+    case 'layer': throw new Error('Not yet implemented');
 
-    case 'domain':
-      break;
+    case 'domain': throw new Error('Not yet implemented');
 
     default:
       throw new Error('Index file not supported');
   }
 
-  return mapper;
+  // return mapper;
 }
 
 module.exports = {
