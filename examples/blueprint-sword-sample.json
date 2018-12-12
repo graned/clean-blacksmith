@@ -3,15 +3,28 @@
     {
       "name": "Sword",
       "props": ["type","weight"]
+    },
+    {
+      "name": "Hammer",
+      "props": ["type","weight"]
     }
   ],
   "interactors": [
     {
       "name": "swordInteractor",
-      "dependencies": ["entities", "stores"],
+      "dependencies": ["Sword", "swordStore"],
       "functions": {
         "requestMaterials": { "args": [] },
         "meltSilver": { "args": [], "isAsync": true }
+      }
+    },
+    {
+      "name": "hammerInteractor",
+      "dependencies": ["Hammer", "hammerStore"],
+      "functions": {
+        "requestMaterials": { "args": [] },
+        "meltSilver": { "args": [], "isAsync": true },
+        "hitHard": { "args": ["place", "material"], "isAsync": true }
       }
     }
   ],
@@ -22,6 +35,13 @@
       "functions": {
         "saveSword": { "args": [], "isAsync": true }
       }
+    },
+    {
+      "name": "hammerStore",
+      "dependencies": ["anotherKingdom"],
+      "functions": {
+        "requestMaterials": { "args": ["listOfMaterials"], "isAsync": true }
+      }
     }
   ],
   "useCases": [
@@ -29,6 +49,11 @@
       "name": "forgeKatana",
       "dependencies": ["swordInteractor"],
       "args": ["swordMaterials"]
+    },
+    {
+      "name": "useHammerWithExtremeForce",
+      "dependencies": ["hammerInteractor"],
+      "args": ["newtons"]
     }
   ]
 }
