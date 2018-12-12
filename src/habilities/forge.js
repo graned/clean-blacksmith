@@ -45,6 +45,7 @@ async function forge({ target, blueprint: blueprintPath }) {
     logger.info('Finished forging! Happy coding :)');
   } catch (error) {
     logger.info('Error while forging!', error);
+    throw error;
   }
 }
 
