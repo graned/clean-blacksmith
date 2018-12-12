@@ -127,12 +127,25 @@ function createPlaceHolderMapper(layer, defs) {
       });
       break;
 
-    case 'index': throw new Error('Not yet implemented');
-
-    case 'domain': throw new Error('Not yet implemented');
-
     default:
       throw new Error(`Unsupported layer '${layer}'`);
+  }
+
+  return mapper;
+}
+
+function createPlaceHolderIndexMapper(indexType, defs) {
+  const mapper = [];
+
+  switch (indexType) {
+    case 'layer':
+      break;
+
+    case 'domain':
+      break;
+
+    default:
+      throw new Error('Index file not supported');
   }
 
   return mapper;
@@ -142,5 +155,6 @@ module.exports = {
   createContructor,
   createDomainDefinition,
   createFunctions,
+  createPlaceHolderIndexMapper,
   createPlaceHolderMapper,
 };
