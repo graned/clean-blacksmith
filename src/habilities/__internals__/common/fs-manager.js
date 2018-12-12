@@ -3,7 +3,7 @@ const path = require('path');
 
 function create(targetPath, fileName, data) {
   const fullName = path.format({
-    root: targetPath,
+    dir: targetPath,
     base: fileName,
   });
   fs.outputFileSync(fullName, data, 'utf-8');
