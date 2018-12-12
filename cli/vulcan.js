@@ -2,7 +2,7 @@
 const logger = require('get-logger')('cli');
 const commandLineArgs = require('command-line-args');
 const blacksmith = require('../src/blacksmith');
-const cliHelp = require('./cli-help');
+const vulcanHelp = require('./vulcan-help');
 
 let mergeOptions = {};
 
@@ -28,5 +28,5 @@ if (mainOptions.command === 'forge') {
 
 if (mainOptions.help) {
   // eslint-disable-next-line
-  console.log(cliHelp());
+  console.log(vulcanHelp());
 }

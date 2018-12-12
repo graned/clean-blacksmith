@@ -1,6 +1,6 @@
 const commandLineUsage = require('command-line-usage');
 const chalk = require('chalk');
-const header = require('./assets/blacksmit-header');
+const header = require('./assets/header');
 
 const optionDefinitions = [
   {
@@ -21,18 +21,22 @@ const optionDefinitions = [
 module.exports = () => {
   const sections = [
     {
-      content: chalk.cyan(header),
+      content: chalk.red(header),
       raw: true,
     },
     {
+      header: 'History',
+      content: 'Vulcan, God of fire 🔥, lord of metalworking and craftmanship. Forge your project with the help of this God in a simple and fast way.',
+    },
+    {
       header: 'Synopsis',
-      content: '$ blacksmith <command> [options]',
+      content: '$ vulcan <command> [options]',
     },
     {
       header: 'Command List',
       content: [
-        { name: 'help', summary: 'Display help information clean-blacksmith.' },
-        { name: 'forge', summary: 'Forges a new domain.' },
+        { name: 'help', summary: 'Displays what Vulcan is capable of.' },
+        { name: 'forge', summary: 'Forges with force and fire a new domain.' },
       ],
     },
     {

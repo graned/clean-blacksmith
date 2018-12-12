@@ -23,7 +23,7 @@
     "url": "https://github.com/graned/clean-blacksmith/issues"
   },
   "bin": {
-    "vulcan": "cli/blacksmith-cli.js"
+    "vulcan": "cli/vulcan.js"
   },
   "homepage": "https://github.com/graned/clean-blacksmith#readme",
   "dependencies": {
