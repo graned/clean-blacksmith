@@ -258,8 +258,13 @@ describe('Helpers: Placeholder mappers', () => {
     it('should generate correct placeholder mapper', () => {
       const fileList = [{ fileName: 'something', path: '.' }, { fileName: 'other', path: '.' }];
       expect(helpers.placeHolderMappers.createLayerIndex(fileList), 'to exhaustively satisfy', [
-        { regex: /<IMPORTS>/g, value: 'Import Output' },
-        { regex: /<EXPOSED_NAMES>/g, value: 'something,other,' },
+        {
+          name: 'index',
+          placeHolderList: [
+            { regex: /<IMPORTS>/g, value: 'Import Output' },
+            { regex: /<EXPOSED_NAMES>/g, value: 'something,other,' },
+          ],
+        },
       ]);
     });
   });
@@ -296,9 +301,14 @@ describe('Helpers: Placeholder mappers', () => {
       };
 
       expect(helpers.placeHolderMappers.createDomainIndex(domainDefinitions), 'to exhaustively satisfy', [
-        { regex: /<IMPORTS>/g, value: 'Import Output' },
-        { regex: /<DOMAIN_INITIALIZATIONS>/g, value: 'Domain init' },
-        { regex: /<USE_CASE_LIST>/g, value: 'useCase1,useCase2,' },
+        {
+          name: 'index',
+          placeHolderList: [
+            { regex: /<IMPORTS>/g, value: 'Import Output' },
+            { regex: /<DOMAIN_INITIALIZATIONS>/g, value: 'Domain init' },
+            { regex: /<USE_CASE_LIST>/g, value: 'useCase1,useCase2,' },
+          ],
+        },
       ]);
     });
   });

@@ -144,8 +144,13 @@ function createLayerIndex(listOfFiles) {
   const imports = generate.imports(listOfFiles);
 
   return [
-    { regex: /<IMPORTS>/g, value: imports },
-    { regex: /<EXPOSED_NAMES>/g, value: listOfFiles.map(f => f.fileName).join().concat(',') },
+    {
+      name: 'index',
+      placeHolderList: [
+        { regex: /<IMPORTS>/g, value: imports },
+        { regex: /<EXPOSED_NAMES>/g, value: listOfFiles.map(f => f.fileName).join().concat(',') },
+      ],
+    },
   ];
 }
 
@@ -174,9 +179,14 @@ function createDomainIndex(domainDefinitions) {
     : '// Nothing to expose';
 
   return [
-    { regex: /<IMPORTS>/g, value: imports },
-    { regex: /<DOMAIN_INITIALIZATIONS>/g, value: domainInit },
-    { regex: /<USE_CASE_LIST>/g, value: useCasesToExpose },
+    {
+      name: 'index',
+      placeHolderList: [
+        { regex: /<IMPORTS>/g, value: imports },
+        { regex: /<DOMAIN_INITIALIZATIONS>/g, value: domainInit },
+        { regex: /<USE_CASE_LIST>/g, value: useCasesToExpose },
+      ],
+    },
   ];
 }
 
