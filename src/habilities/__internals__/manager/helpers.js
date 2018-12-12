@@ -4,8 +4,8 @@ const generateFactory = require('../common/generate');
 /**
  * Function that creates a domain init mapper based on a list of files that were created.
  *
- * @param {*} createdFiles
- * @param {*} layerDefinitions
+ * @param {*} createdFiles List of files created in the domain
+ * @param {*} layerDefinitions Blueprint definitions for a layer
  */
 function createDomainDefinition(createdFiles, layerDefinitions) {
   const definition = [];
@@ -17,7 +17,7 @@ function createDomainDefinition(createdFiles, layerDefinitions) {
     if (!layerDef) throw new Error('Created file not in definition');
 
     definition.push({
-      fileName,
+      name: fileName,
       dependencies: layerDef.dependencies,
     });
   });
@@ -133,19 +133,51 @@ function createLayer(layer, defs) {
   return mapper;
 }
 
-function createPlaceHolderIndexMapper(indexType/* , defs */) {
-  // const mapper = [];
+/**
+ * Generates a map of placeholder values to be replaced.
+ *
+ * @param {*} listOfFiles
+ */
+function createLayerIndex(listOfFiles) {
+  const generate = generateFactory(templates.layerIndex);
 
-  switch (indexType) {
-    case 'layer': throw new Error('Not yet implemented');
+  const imports = generate.imports(listOfFiles);
 
-    case 'domain': throw new Error('Not yet implemented');
+  return [
+    { regex: /<IMPORTS>/g, value: imports },
+    { regex: /<EXPOSED_NAMES>/g, value: listOfFiles.map(f => f.fileName).join().concat(',') },
+  ];
+}
 
-    default:
-      throw new Error('Index file not supported');
-  }
+/**
+ * Generates a map of placeholders values to be replaced in the domain index file.
+ *
+ * @param {*} domainDefinitions
+ * Domain definitions will have the following structure
+ * {
+ *  entities:    [{name, dependencies}, {name, dependencies}],
+ *  interactors: [{name, dependencies}, {name, dependencies}],
+ *  stores:      [{name, dependencies}, {name, dependencies}],
+ *  useCases:    [{name, dependencies}, {name, dependencies}],
+ * }
+ *
+ */
+function createDomainIndex(domainDefinitions) {
+  const generate = generateFactory(templates.domainIndex);
 
-  // return mapper;
+  const createdLayers = Object.keys(domainDefinitions).map(layer => ({ name: layer, path: null }));
+  const imports = generate.imports(createdLayers);
+  const domainInit = generate.domainInit(domainDefinitions);
+  const useCasesToExpose = domainDefinitions.useCases != null
+    && domainDefinitions.useCases.length > 0
+    ? domainDefinitions.useCases.map(useCase => useCase.name).join().concat(',')
+    : '// Nothing to expose';
+
+  return [
+    { regex: /<IMPORTS>/g, value: imports },
+    { regex: /<DOMAIN_INITIALIZATIONS>/g, value: domainInit },
+    { regex: /<USE_CASE_LIST>/g, value: useCasesToExpose },
+  ];
 }
 
 module.exports = {
