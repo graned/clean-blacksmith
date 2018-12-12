@@ -2,6 +2,24 @@ const functionTemplate = require('./templates/function.template');
 const constructorTemplate = require('./templates/constructor.template');
 const generateFactory = require('../common/generate');
 
+function createDomainDefinition(createdFiles, layerDefinitions) {
+  const definition = [];
+
+  createdFiles.forEach((file) => {
+    const { fileName } = file;
+    const layerDef = layerDefinitions.filter(def => def.name === fileName).pop();
+
+    if (!layerDef) throw new Error('Created file not in definition');
+
+    definition.push({
+      fileName,
+      dependencies: layerDef.dependencies,
+    });
+  });
+
+  return definition;
+}
+
 /**
  * Function that creates a string representation of a constructor function, if a list of properties
  * is given, otherwise returns an empty string.
@@ -116,6 +134,7 @@ function createPlaceHolderMapper(layer, defs) {
 
 module.exports = {
   createContructor,
+  createDomainDefinition,
   createFunctions,
   createPlaceHolderMapper,
 };

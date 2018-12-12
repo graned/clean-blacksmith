@@ -217,3 +217,32 @@ describe('Helpers: #createPlaceHolderMapper', () => {
     });
   });
 });
+
+describe('Helpers: #createDomainDefinition', () => {
+  const definition = [
+    {
+      name: 'swordStore',
+      dependencies: ['dataSource'],
+      functions: {
+        persist: { args: [], isAsync: true },
+      },
+    },
+  ];
+
+  context('with a given list of created files', () => {
+    it('should generate correct placeholder list', () => {
+      expect(helpers.createDomainDefinition([{ fileName: 'swordStore', path: '/' }], definition),
+        'to equal',
+        [{
+          fileName: 'swordStore',
+          dependencies: ['dataSource'],
+        }]);
+    });
+  });
+
+  context('with an empty property list of created files', () => {
+    it('should return an empty string', () => {
+      expect(helpers.createDomainDefinition([], definition), 'to equal', []);
+    });
+  });
+});
