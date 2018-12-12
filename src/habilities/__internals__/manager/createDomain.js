@@ -1,4 +1,4 @@
-const logger = require('get-logger')('createLayer');
+const logger = require('get-logger')('createDomainFiles');
 
 const file = require('../common/fs-manager');
 const templates = require('./templates');
@@ -42,7 +42,7 @@ function createDomainFiles(path, valueMapper, template) {
       file.create(path, `${element.name}.js`, generatedBaseLine);
 
       generatedFileList.push({ name: element.name, path });
-      logger.info(`Created file: '${path}/${element.name}.js'`);
+      logger.info(`'${path}/${element.name}.js'`);
     } catch (error) {
       logger.error('Something went wrong!', error);
     }

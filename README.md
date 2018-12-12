@@ -34,16 +34,15 @@ cleanBlacksmith(command, details)
 The blacksmith will give you some feedback through log messages to see what has been created:
 ```
 Sample console output:
-
-createLayer: Created file: 'entities/Sword.js'
-createIndex: Created file: 'entities/index.js'
-createLayer: Created file: 'interactors/swordInteractor.js'
-createIndex: Created file: 'interactors/index.js'
-createLayer: Created file: 'stores/swordStore.js'
-createIndex: Created file: 'stores/index.js'
-createLayer: Created file: 'useCases/forgeSword.js'
-createIndex: Created file: 'useCases/index.js'
-createIndex: Created file: 'domain/index.js'
+createdDomainFiles: '<TARGET PATH>/domain/entities/Sword.js'
+createdDomainFiles: '<TARGET PATH>/domain/entities/index.js'
+createdDomainFiles: '<TARGET PATH>/domain/interactors/swordInteractor.js'
+createdDomainFiles: '<TARGET PATH>/domain/interactors/index.js'
+createdDomainFiles: '<TARGET PATH>/domain/stores/swordStore.js'
+createdDomainFiles: '<TARGET PATH>/domain/stores/index.js'
+createdDomainFiles: '<TARGET PATH>/domain/useCases/forgeSword.js'
+createdDomainFiles: '<TARGET PATH>/domain/useCases/index.js'
+createdDomainFiles: '<TARGET PATH>/domain/domain/index.js'
 forge: Finished forging! Happy coding :)
 ```
 ## As CLI tool
