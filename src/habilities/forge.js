@@ -3,7 +3,7 @@ const logger = require('get-logger')('forge');
 const manager = require('./__internals__/manager');
 
 function createDomain(targetPath, resources) {
-  const domainResults = [];
+  const domainInitDefinitions = {};
   const domainPath = path.join(targetPath, '/domain');
 
   Object.keys(resources).forEach((layerToCreate) => {
@@ -14,16 +14,16 @@ function createDomain(targetPath, resources) {
     const fileList = manager.createDomain.layer[layerToCreate](layerPath, mapper);
 
     const indexFileListMapper = manager.helpers.createPlaceHolderMapper('index', fileList);
-    manager.createIndex.layer(layerPath, indexFileListMapper);
-    domainPath.push({
-      layerToCreate,
-      createdFiles: fileList || [],
-      dependencies: layerDefinition.dependencies || [],
-    });
+    manager.createDomain.layer.index(layerPath, indexFileListMapper);
+
+    domainInitDefinitions[layerToCreate] = manager.helpers.createDomainDefinition(
+      fileList,
+      layerDefinition,
+    );
   });
 
-  const domainIndexMapper = manager.helpers.createPlaceHolderMapper('domain', domainResults);
-  manager.createIndex.domain(domainPath, domainIndexMapper);
+  const domainIndexMapper = manager.helpers.createPlaceHolderMapper('domain', domainInitDefinitions);
+  manager.createDomain.index(domainPath, domainIndexMapper);
 }
 
 async function forge({ target, blueprint: blueprintPath }) {
