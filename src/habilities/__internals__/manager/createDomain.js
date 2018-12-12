@@ -29,7 +29,7 @@ const generateFactory = require('../common/generate');
  * @param {*} valueMapper List of values to be appended to the file
  * @param {*} template Template to use to generate file content
  * @returns A list of fileName and the location where they were generated.
- *    i.e. [{ fileName: 'Person.js', path: '/domain/entities' }]
+ *    i.e. [{ name: 'Person', path: '/domain/entities' }]
  */
 function createDomainFiles(path, valueMapper, template) {
   const generatedFileList = [];
@@ -41,7 +41,7 @@ function createDomainFiles(path, valueMapper, template) {
 
       file.create(path, `${element.name}.js`, generatedBaseLine);
 
-      generatedFileList.push({ fileName: element.name, path });
+      generatedFileList.push({ name: element.name, path });
       logger.info(`Created file: '${path}/${element.name}.js'`);
     } catch (error) {
       logger.error('Something went wrong!', error);

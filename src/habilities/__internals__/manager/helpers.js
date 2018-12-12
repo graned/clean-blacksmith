@@ -11,13 +11,13 @@ function createDomainDefinition(createdFiles, layerDefinitions) {
   const definition = [];
 
   createdFiles.forEach((file) => {
-    const { fileName } = file;
-    const layerDef = layerDefinitions.filter(def => def.name === fileName).pop();
+    const { name } = file;
+    const layerDef = layerDefinitions.filter(def => def.name === name).pop();
 
     if (!layerDef) throw new Error('Created file not in definition');
 
     definition.push({
-      name: fileName,
+      name,
       dependencies: layerDef.dependencies,
     });
   });
@@ -141,14 +141,16 @@ function createLayer(layer, defs) {
 function createLayerIndex(listOfFiles) {
   const generate = generateFactory(templates.layerIndex);
 
-  const imports = generate.imports(listOfFiles);
+  // NOTE: Set path to null to have a proper index import.
+  const createdLayerFiles = listOfFiles.map(({ name }) => ({ name, path: null }));
+  const imports = generate.imports(createdLayerFiles);
 
   return [
     {
       name: 'index',
       placeHolderList: [
         { regex: /<IMPORTS>/g, value: imports },
-        { regex: /<EXPOSED_NAMES>/g, value: listOfFiles.map(f => f.fileName).join().concat(',') },
+        { regex: /<EXPOSED_NAMES>/g, value: listOfFiles.map(f => f.name).join().concat(',') },
       ],
     },
   ];
