@@ -3,7 +3,7 @@ const logger = require('get-logger')('forge');
 const manager = require('./__internals__/manager');
 
 function createDomain(targetPath, resources) {
-  const { placeHolderMappers, createDomainDefinition, createDomain: createDomainFiles } = manager;
+  const { helpers, createDomainDefinition, createDomain: createDomainFiles } = manager;
   const domainInitDefinitions = {};
   const domainPath = path.join(targetPath, '/domain');
 
@@ -11,7 +11,7 @@ function createDomain(targetPath, resources) {
     const layerPath = path.join(domainPath, `/${layerToCreate}`);
     const layerDefinition = resources[layerToCreate];
 
-    const layerPlaceHolderMapper = placeHolderMappers.createLayer(
+    const layerPlaceHolderMapper = helpers.placeHolderMappers.createLayer(
       layerToCreate,
       layerDefinition,
     );
@@ -20,7 +20,7 @@ function createDomain(targetPath, resources) {
       layerPlaceHolderMapper,
     );
 
-    const layerIndexPlaceHolderMapper = placeHolderMappers.createLayerIndex(
+    const layerIndexPlaceHolderMapper = helpers.placeHolderMappers.createLayerIndex(
       'index',
       createdFiles,
     );
@@ -34,7 +34,7 @@ function createDomain(targetPath, resources) {
     );
   });
 
-  const domainIndexPlaceHolderMapper = placeHolderMappers.createDomainIndex(
+  const domainIndexPlaceHolderMapper = helpers.placeHolderMappers.createDomainIndex(
     'domain',
     domainInitDefinitions,
   );
