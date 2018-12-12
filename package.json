@@ -1,7 +1,7 @@
 {
   "name": "clean-blacksmith",
   "version": "1.0.0",
-  "description": "",
+  "description": "Create your service domain wih clean code principals.",
   "main": "src/blacksmith.js",
   "scripts": {
     "test": "mocha 'tests/*.test.js'",
