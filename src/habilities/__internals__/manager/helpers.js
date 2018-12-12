@@ -1,5 +1,4 @@
-const functionTemplate = require('./templates/function.template');
-const constructorTemplate = require('./templates/constructor.template');
+const templates = require('./templates');
 const generateFactory = require('../common/generate');
 
 /**
@@ -32,7 +31,7 @@ function createDomainDefinition(createdFiles, layerDefinitions) {
  * @param {*} properties List of properties to be part of the constructor function.
  */
 function createContructor(properties = []) {
-  const generate = generateFactory(constructorTemplate);
+  const generate = generateFactory(templates.constructor);
 
   if (properties.length === 0) {
     return '';
@@ -55,7 +54,7 @@ function createFunctions(functionsToGenerate = {}) {
   const fnNameList = [];
 
   if (functionsToGenerate) {
-    const generate = generateFactory(functionTemplate);
+    const generate = generateFactory(templates.function);
 
     Object.keys(functionsToGenerate).forEach((fnName) => {
       const { args, isAsync = false } = functionsToGenerate[fnName];
@@ -80,7 +79,7 @@ function createFunctions(functionsToGenerate = {}) {
  * @param {*} layer Clean architecture layer(entities, interactors, stores, useCases)
  * @param {*} defs Domain definitions.
  */
-function createPlaceHolderMapper(layer, defs) {
+function createLayer(layer, defs) {
   const mapper = [];
 
   switch (layer) {
@@ -153,6 +152,11 @@ module.exports = {
   createContructor,
   createDomainDefinition,
   createFunctions,
-  createPlaceHolderIndexMapper,
-  createPlaceHolderMapper,
+
+
+  placeHolderMappers: {
+    createDomainIndex,
+    createLayerIndex,
+    createLayer,
+  },
 };
