@@ -2,6 +2,12 @@ const functionTemplate = require('./templates/function.template');
 const constructorTemplate = require('./templates/constructor.template');
 const generateFactory = require('../common/generate');
 
+/**
+ * Function that creates a domain init mapper based on a list of files that were created.
+ *
+ * @param {*} createdFiles
+ * @param {*} layerDefinitions
+ */
 function createDomainDefinition(createdFiles, layerDefinitions) {
   const definition = [];
 
