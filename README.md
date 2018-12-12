@@ -47,32 +47,31 @@ createIndex: Created file: 'domain/index.js'
 forge: Finished forging! Happy coding :)
 ```
 ## As CLI tool
-The module also offers a CLI tool if you desire to interact with the **_clean-blacksmith_** through your terminal.
-```
-blacksmith <COMMAND> --target <PATH> --blueprint <PATH>
+If you like to use your terminal to create your domain, this module offers as well a CLI tool called
+[vulcan](https://en.wikipedia.org/wiki/Vulcan_(mythology)). **_Vulcan_** recieves a command and some
+parameters in order to create your service domain.
 
-blacksmith forge --target "/path-to-project/" --blueprint "/path-to-blueprint/blueprint.json"
+
+Example:
+```
+vulcan <COMMAND> --target <PATH> --blueprint <PATH>
+
+vulcan forge --target "/path-to-project/" --blueprint "/path-to-blueprint/blueprint.json"
 ```
 
 If you need to learn what is the current available commands, you can display the help:
 ```
-blacksmith -h
-
-or
-
-blacksmith --help
+vulcan --help [-h]
 ```
 
 # Blueprint file
-In order for the **_blacksmith_** to be able to work, you need to specify a blueprint JSON file. This file has the following structure:
+The blueprint file defines the way our domain is constructed, this is required in order to know
+how layers are defined. The file at the moment **only supports JSON format** but it will be target later to
+support more formats.
 
-_NOTE_: This project contains two full blueprint example definitions in the `/examples` folder.
+_NOTE_: This project contains two full blueprint examples definitions in the `/examples` folder.
 
 ```
-{
-  <clean_arhictecture_layer>: [Array of layer definitions]
-}
-
 for example:
 {
   "entities": [
