@@ -1,7 +1,7 @@
 Generate a [clean-architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) skeleton project easy and fast!.
 
 # Clean Blacksmith [![CircleCI](https://circleci.com/gh/graned/clean-blacksmith/tree/master.svg?style=svg)](https://circleci.com/gh/graned/clean-blacksmith/tree/master)
-<img src="https://png2.kisspng.com/sh/39fefdb9b2b8f4524ce5d848ca636895/L0KzQYm3WMA1N5pmh5H0aYP2gLBuTfhwdpZARdRuZT3rf7Bsmb1jbZYyiOR4ZIXmhLr2jr10baN7gdVuLUXlRobqVvI0PWU6faMELkO0QIG3UcM6OWY4S6UENka4SYS7VcYveJ9s/kisspng-honey-bee-honey-bee-production-service-5b65c6b3545e19.3100013915333966593456.png" width="50%" height="50%">
+<img src="https://vignette.wikia.nocookie.net/tabularasadd/images/8/84/Hephaestus.jpg/revision/latest?cb=20120420210624" width="50%" height="50%">
 
 # Synopsis
 **_Clean Blacksmith_** will help you create the base of your domain, so you can only focus on the implementation! just tell the **_CleanBlacksmith_** where you want to create your files and give him a blueprint(only JSON format supported at the moment) and he will take care of the rest.
