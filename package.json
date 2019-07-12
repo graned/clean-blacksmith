@@ -1,6 +1,6 @@
 {
   "name": "clean-blacksmith",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Create your service domain wih clean code principals.",
   "main": "src/blacksmith.js",
   "scripts": {
