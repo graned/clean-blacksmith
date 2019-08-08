@@ -1,0 +1,65 @@
+{
+  "dataLayer": [
+    {
+      "name": "swordGateway",
+      "dependencies": [{ "name":"db", "files": ["pg", "mysql"] }],
+      "functions": [
+        { "name": "saveSword", "args": [], "isAsync": true }
+      ]
+    }
+  ],
+  "domainLayer": {
+    "entities": [
+      {
+        "name": "sword",
+        "props": [{ "name": "type" }, { "name": "weight" }]
+      }
+    ],
+    "interactors": [
+      {
+        "name": "swordInteractor",
+        "dependencies": [{ "name": "entity" }, { "name": "gateway" }],
+        "functions": [
+          { "name": "requestMaterials", "args": [] },
+          { "name": "meltSilver", "args": [], "isAsync": true }
+        ]
+      }
+    ],
+    "models": [
+      {
+        "name": "swordRequestModel",
+        "props": [{ "name": "type" }, { "name": "weight" }]
+      },
+      {
+        "name": "swordResponseModel",
+        "props": [{ "name": "type" }, { "name": "weight" }]
+      }
+    ],
+    "useCases": [
+      {
+        "name": "forgeKatana",
+        "dependencies": [{ "name": "swordInteractor" }, { "name": "swordResponseModel" }, { "name": "swordPresenter" }],
+        "args": [{ "name": "swordRequestModel" }]
+      }
+    ]
+  },
+  "viewLayer": {
+    "controllers": [
+      {
+        "name": "sowrdController",
+        "dependencies": [{ "name": "useCase" }, { "name": "requestModel" }],
+        "functions": [
+          { "name": "forgeKatana", "args": [{ "name": "swordMaterials" }], "isAsync": true }
+        ]
+      }
+    ],
+    "presenters": [
+      {
+        "name": "swordPresenter",
+        "functions": [
+          { "name": "formatData", "args": [{ "name": "responseModel" }] }
+        ]
+      }
+    ]
+  }
+}
